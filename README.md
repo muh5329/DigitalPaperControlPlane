@@ -40,3 +40,4 @@ This program runs on a chron job on a Debian server that according to properties
 
 Makes use of https://github.com/janten/dpt-rp1-py python libraries to send commands to the e-paper device
 
+Built with Poetry | Typer

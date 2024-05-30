@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "dtp-controll-panel"
+version = "0.1.0"
+description = ""
+authors = ["Muneeb Haq <muh5329@gmail.com>"]
+readme = "README.md"
+
+
+[tool.poetry.scripts]
+dtp-controll-panel = "dtp_controll_panel.main:app" 
+
+
+[tool.poetry.dependencies]
+python = "^3.12"
+typer = {extras = ["all"], version = "^0.12.3"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
