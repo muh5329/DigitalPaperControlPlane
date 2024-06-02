@@ -1,5 +1,5 @@
 import typer
-
+from dptrp1 import LookUpDPT
 
 app = typer.Typer()
 
