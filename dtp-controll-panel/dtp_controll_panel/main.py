@@ -1,6 +1,5 @@
 import typer
 import fileio
-from dptrp1.dptrp1 import DigitalPaper
 
 app = typer.Typer()
 
@@ -19,13 +18,14 @@ def render(art: str):
     """
     print(f"Rendering : {art}")
 
-    
-    
-    
 
-    if art == "random":
-        typer.echo("rendering random art")
-
-    typer.echo("draw")
+@app.command()
+def upload(dir: str):
+    """
+    draw
+    """
+    print(f"Uploading all files in  : {dir}")
+    fileio.upload_files_to_dpt(dir)
+    typer.echo("upload")
 
 

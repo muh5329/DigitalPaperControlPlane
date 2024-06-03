@@ -1,5 +1,6 @@
 import os
 import re 
+import time
 from dptrp1.dptrp1 import DigitalPaper, find_auth_files, get_default_auth_files
 ROOT_FOLDER = 'Document'
 
@@ -31,7 +32,7 @@ def upload_files_to_dpt(directory):
                 print(f"Writing file to DPT :'{file}'")
                 # dptrp1 upload ~/Desktop/scan.pdf
                 remote_path = add_prefix(ROOT_FOLDER + "/" + os.path.basename(filePath))
-                dpt.upload(filePath,remote_path)
+                dpt.upload_file(filePath,remote_path)
             else :
                 print(f"Invalid file ending (PDFs only allowed) :'{file}'")   
 
