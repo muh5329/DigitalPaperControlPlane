@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./dtp-controll-panel/dtp_controll_panel"
+    ]
+}

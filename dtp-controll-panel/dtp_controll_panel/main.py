@@ -1,5 +1,6 @@
 import typer
-from dptrp1 import LookUpDPT
+import fileio
+from dptrp1.dptrp1 import DigitalPaper
 
 app = typer.Typer()
 
@@ -12,10 +13,19 @@ def callback():
 
 
 @app.command()
-def draw():
+def render(art: str):
     """
     draw
     """
+    print(f"Rendering : {art}")
+
+    
+    
+    
+
+    if art == "random":
+        typer.echo("rendering random art")
+
     typer.echo("draw")
 
 

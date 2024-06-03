@@ -34,7 +34,13 @@ This program runs on a chron job on a Debian server that according to properties
     - Show an updating multi function page with the latest weather and calendar / top stocks.
 
 
+## Install and runtime 
 
+As a prerequisite , one must register the DPT1 device with your runtime computer via the dpt-rp1-py cli :
+    - ```dptrp1 register```
+
+From then on, install the dtp-controll-panel and execute one of the many chron jobs / cli commands
+    
 
 ## Appendix
 
