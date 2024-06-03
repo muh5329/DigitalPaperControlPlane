@@ -65,8 +65,8 @@ def authenticate(dpt):
     dpt.authenticate(client_id, key)
 
 # # Example usage:
-# directory_path = "/Users/muneebhaq/Downloads/pdf"
-# upload_files_to_dpt(directory_path)    
+directory_path = "/Users/muneebhaq/Downloads/pdf"
+upload_files_to_dpt(directory_path)    
 
 
 """
@@ -82,11 +82,14 @@ def pick_a_random_file_flip_to_page():
     print("Picking a random file ")
     print("Pulling files ... ")
     fileList = dpt.list_documents()
-    random_number = random.randint(1, len(fileList))
+    random_number = random.randint(1, len(fileList) -1)
 
     file = fileList[random_number]
     print(f"File {file["entry_name"]}")  
-    rand_page = random.randint(1, int(file["total_page"]))
+    total_pages = int(file["total_page"])
+    rand_page = 1
+    if total_pages > 1:
+        rand_page = random.randint(1, int(file["total_page"]) -1)
     print(f"Random page {rand_page}") 
     print("Flipping to random page..")
 
@@ -94,5 +97,3 @@ def pick_a_random_file_flip_to_page():
     dpt.display_document(entry_id,rand_page)
 
     print("finished")  
-
-pick_a_random_file_flip_to_page()

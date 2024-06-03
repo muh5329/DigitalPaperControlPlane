@@ -1,4 +1,12 @@
 from  dtp_controll_panel.fileio import pick_a_random_file_flip_to_page
+import time
+
+
 
 if __name__ == "__main__":
-    pick_a_random_file_flip_to_page()
+    while True:
+        pick_a_random_file_flip_to_page()
+        time.sleep(60)  # Sleep for 30 seconds
+    
+
+
