@@ -5,6 +5,10 @@ Sony Digital Paper control plane to show random stuff on a set interval
 
 
 
+https://github.com/muh5329/DigitalPaperControlPlane/assets/106366024/3de109f4-f922-47b9-97b2-524c941ea079
+
+
+
 [![Python](https://img.shields.io/badge/Python-3.12.2-green.svg)](https://www.python.org/)
 
 
