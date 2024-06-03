@@ -1,6 +1,7 @@
 import os
 import re 
 import time
+import random
 from dptrp1.dptrp1 import DigitalPaper, find_auth_files, get_default_auth_files
 ROOT_FOLDER = 'Document'
 
@@ -63,6 +64,35 @@ def authenticate(dpt):
         key = fh.read()
     dpt.authenticate(client_id, key)
 
-# Example usage:
-directory_path = "/Users/muneebhaq/Downloads/pdf"
-upload_files_to_dpt(directory_path)    
+# # Example usage:
+# directory_path = "/Users/muneebhaq/Downloads/pdf"
+# upload_files_to_dpt(directory_path)    
+
+
+"""
+    Pick a random a file and flip to a random page
+"""
+def pick_a_random_file_flip_to_page(): 
+     
+    ## Establish connection
+    dpt = DigitalPaper()
+    authenticate(dpt)
+
+    
+    print("Picking a random file ")
+    print("Pulling files ... ")
+    fileList = dpt.list_documents()
+    random_number = random.randint(1, len(fileList))
+
+    file = fileList[random_number]
+    print(f"File {file["entry_name"]}")  
+    rand_page = random.randint(1, int(file["total_page"]))
+    print(f"Random page {rand_page}") 
+    print("Flipping to random page..")
+
+    entry_id = file["entry_id"]
+    dpt.display_document(entry_id,rand_page)
+
+    print("finished")  
+
+pick_a_random_file_flip_to_page()

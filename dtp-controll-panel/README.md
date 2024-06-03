@@ -5,10 +5,9 @@ Sony Digital Paper control plane to show random stuff on a set interval
 
 ## Features
 
-- Random daily art
+- Random daily art / Comic / Manga Page ✔️
 - NYT or other newspaper [TODO] 
-- Comic / Manga Page [TODO] 
-- QR Code [TODO] 
+- QR Code ✔️
 - Word of the day[TODO] 
 - Multi Function  [TODO]  
     - Weather
@@ -31,3 +30,13 @@ Test with
 ```
 dtp-controll-panel
 ```
+
+## Commands
+
+ !! Device must be registered prior to running commands !!
+
+"""render random"""
+- Renders random a random page from a random document
+
+"""upload directory"""
+- Uploads all files within a directory to DPT Device

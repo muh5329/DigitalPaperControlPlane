@@ -12,11 +12,14 @@ def callback():
 
 
 @app.command()
-def render(art: str):
+def render(draw_action: str):
     """
     draw
     """
-    print(f"Rendering : {art}")
+    print(f"Rendering : {draw_action}")
+
+    if draw_action == "random":
+        fileio.pick_a_random_file_flip_to_page()
 
 
 @app.command()
