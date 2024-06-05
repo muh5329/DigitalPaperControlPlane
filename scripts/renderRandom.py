@@ -6,7 +6,7 @@ import time
 if __name__ == "__main__":
     while True:
         pick_a_random_file_flip_to_page()
-        time.sleep(60)  # Sleep for 30 seconds
+        time.sleep(120)  # Sleep for 60 seconds
     
 
 
