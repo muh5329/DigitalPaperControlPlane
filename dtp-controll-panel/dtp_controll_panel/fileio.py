@@ -84,16 +84,22 @@ def pick_a_random_file_flip_to_page():
     fileList = dpt.list_documents()
     random_number = random.randint(1, len(fileList) -1)
 
-    file = fileList[random_number]
-    print(f"File {file["entry_name"]}")  
-    total_pages = int(file["total_page"])
-    rand_page = 1
-    if total_pages > 1:
-        rand_page = random.randint(1, int(file["total_page"]) -1)
+    filePagePair = []
+    for file in fileList:
+        total_pages = int(file["total_page"]) -1
+        entry_id = file["entry_id"]
+        for k in range(total_pages):
+            filePagePair.append((entry_id, k+1))
+
+     
+    random_number = random.randint(0, len(filePagePair) -1)
+    file_id, rand_page =  filePagePair[random_number]
+
+    print(f"File {file_id}") 
     print(f"Random page {rand_page}") 
     print("Flipping to random page..")
 
-    entry_id = file["entry_id"]
-    dpt.display_document(entry_id,rand_page)
+    dpt.display_document(file_id,rand_page)
 
     print("finished")  
+
