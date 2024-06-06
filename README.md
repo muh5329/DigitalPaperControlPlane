@@ -1,6 +1,6 @@
 # DigitalPaperControlPlane
 
-Sony Digital Paper control plane to show random stuff on a set interval
+Sony Digital Paper control plane . Turns a Sony Digital Paper device into a passive art display/ information display device.
 
 
 
