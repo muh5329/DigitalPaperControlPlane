@@ -4,3 +4,6 @@ shellingham==1.4.0
 pytest==6.2.4
 dpt-rp1-py
 setuptools
+python-dotenv
+requests
+urllib
