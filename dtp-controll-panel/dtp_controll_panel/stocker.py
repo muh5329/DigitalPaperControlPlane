@@ -7,6 +7,7 @@ import requests
 from urllib.parse import urlencode, urljoin
 from dotenv import load_dotenv
 from typing import List
+from datetime import datetime
 
 class Stocker:
   """  
@@ -42,17 +43,22 @@ class Stocker:
     load_dotenv()
     
     self.stocks = stocks
-    self.stocker = {
-
-    }
+    self.stocker = {}
+    
     self.alpha_v_api_key = os.getenv("STOCKER_API_KEY")
+    self.default_tickers = os.getenv("DEFAULT_TICKERS").split(',')
 
 
   def get_ticket_daily(self, ticker: str = ""):
+   
+    current_date = datetime.now()
+    yyyy_mm_dd = current_date.strftime("%Y-%m-%d")
+
+
     base_url = "https://www.alphavantage.co/query"
     params = {
         "function": "TIME_SERIES_DAILY",
-        "symbol": "IBM",
+        "symbol": ticker,
         "apikey": self.alpha_v_api_key,
     }
 
@@ -60,8 +66,22 @@ class Stocker:
     url_with_params = base_url + '?' + urlencode(params)
     r = requests.get(url_with_params)
     data = r.json()
+    return data["Time Series (Daily)"][yyyy_mm_dd]
+    # print(data["Time Series (Daily)"][yyyy_mm_dd])
 
-    print(data)
+  def build_default_tickers_daily(self):
+    for ticker in self.default_tickers:
+      
+      data = stocker.get_ticket_daily(ticker)
+      # stock = {
+      #   "IBM" : {
+      #       "price": 1.23
+      #       "lastPrice": 1.23
+      #       "monthly_trend": "upward"
+      #     }
+      # }
+
+
 
 stocker = Stocker()
-stocker.get_ticket_daily()
+stocker.get_ticket_daily("NVDA")
