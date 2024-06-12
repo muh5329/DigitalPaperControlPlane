@@ -7,7 +7,7 @@ import requests
 from urllib.parse import urlencode, urljoin
 from dotenv import load_dotenv
 from typing import List
-from datetime import datetime
+from datetime import datetime,timedelta
 
 class Stocker:
   """  
@@ -24,17 +24,26 @@ class Stocker:
           "IBM" : {
             price: 1.23
             lastPrice: 1.23
+            volume : 123123
             monthly_trend: "upward"
           },
 
         }
+        
 
       Currently sources data from the following API:
         https://www.alphavantage.co/
 
         Generate an api key from : https://www.alphavantage.co/support/#api-key
         Store API KEY in environment var or .env , see sample
+      
+        The above api is rate limited to 25 request per day, might consider using
+        https://site.financialmodelingprep.com/developer/docs
 
+        but for the purposes of a single time load non-realtime stock
+           maker app there is no need 
+
+           but an alternative is https://site.financialmodelingprep.com/developer/docs  
       
 
   """
@@ -49,11 +58,13 @@ class Stocker:
     self.default_tickers = os.getenv("DEFAULT_TICKERS").split(',')
 
 
-  def get_ticket_daily(self, ticker: str = ""):
-   
+  def get_ticker_daily(self, ticker: str = ""):
     current_date = datetime.now()
     yyyy_mm_dd = current_date.strftime("%Y-%m-%d")
 
+   
+    yesterday = current_date - timedelta(days=1)
+    yesterday_yyyy_mm_dd = yesterday.strftime('%Y-%m-%d')
 
     base_url = "https://www.alphavantage.co/query"
     params = {
@@ -66,22 +77,29 @@ class Stocker:
     url_with_params = base_url + '?' + urlencode(params)
     r = requests.get(url_with_params)
     data = r.json()
-    return data["Time Series (Daily)"][yyyy_mm_dd]
-    # print(data["Time Series (Daily)"][yyyy_mm_dd])
+    # print(data)
+    if yyyy_mm_dd in data["Time Series (Daily)"]:
+      return data["Time Series (Daily)"][yyyy_mm_dd]
+    else:
+      return data["Time Series (Daily)"][yesterday_yyyy_mm_dd]
+    
+  def get_dummy_daily_ticker(self,ticker=""):
+    data = {'1. open': '121.7700', '2. high': '122.8700', '3. low': '118.7400', '4. close': '120.9100', '5. volume': '222551158'}
+    return data
 
   def build_default_tickers_daily(self):
     for ticker in self.default_tickers:
-      
-      data = stocker.get_ticket_daily(ticker)
-      # stock = {
-      #   "IBM" : {
-      #       "price": 1.23
-      #       "lastPrice": 1.23
-      #       "monthly_trend": "upward"
-      #     }
-      # }
+      data = stocker.get_ticker_daily(ticker)
+      # data = stocker.get_dummy_daily_ticker(ticker)
+      self.stocker[ticker] =  {
+              'price': data['1. open'],
+              'lastPrice': '',
+              'volume' : data['5. volume'],
+              'trend': ''
+      }
 
 
 
 stocker = Stocker()
-stocker.get_ticket_daily("NVDA")
+stocker.build_default_tickers_daily()
+print(stocker.stocker)
