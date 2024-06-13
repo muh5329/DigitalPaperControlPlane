@@ -91,8 +91,8 @@ class Stocker:
 
   def build_default_tickers_daily(self):
     for ticker in self.default_tickers:
-      data = stocker.get_ticker_daily(ticker)
-      #data = stocker.get_dummy_daily_ticker(ticker)
+      data = self.get_ticker_daily(ticker)
+      #data = self.get_dummy_daily_ticker(ticker)
       self.stocker[ticker] =  {
               'price': data['1. open'],
               'lastPrice': '',
