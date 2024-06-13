@@ -8,6 +8,8 @@ from urllib.parse import urlencode, urljoin
 from dotenv import load_dotenv
 from typing import List
 from datetime import datetime,timedelta
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
 class Stocker:
   """  
@@ -90,7 +92,7 @@ class Stocker:
   def build_default_tickers_daily(self):
     for ticker in self.default_tickers:
       data = stocker.get_ticker_daily(ticker)
-      # data = stocker.get_dummy_daily_ticker(ticker)
+      #data = stocker.get_dummy_daily_ticker(ticker)
       self.stocker[ticker] =  {
               'price': data['1. open'],
               'lastPrice': '',
@@ -98,8 +100,19 @@ class Stocker:
               'trend': ''
       }
 
+  def create_pdf_from_dict(self,data, filename):
+      c = canvas.Canvas(filename, pagesize=letter)
+      y = 750  # Starting y-coordinate for writing data
 
+      for key, value in data.items():
+          text = f"{key}: {value}"
+          c.drawString(100, y, text)
+          y -= 20  # Move to the next line
 
-stocker = Stocker()
-stocker.build_default_tickers_daily()
-print(stocker.stocker)
+      c.save()
+
+  
+
+# stocker = Stocker()
+# stocker.build_default_tickers_daily()
+# stocker.create_pdf_from_dict(stocker.stocker, "output.pdf")
