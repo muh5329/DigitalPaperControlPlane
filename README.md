@@ -15,15 +15,15 @@ https://github.com/muh5329/DigitalPaperControlPlane/assets/106366024/3de109f4-f9
 
 ## Features
 
-- Random daily art
+- Random daily art ✔️
 - NYT or other newspaper [TODO] 
-- Comic / Manga Page [TODO] 
-- QR Code [TODO] 
+- Comic / Manga Page ✔️ 
+- QR Code ✔️
 - Word of the day[TODO] 
 - Multi Function  [TODO]  
     - Weather
     - Calendar
-    - Stocks
+- Stocks ✔️
 
 
 

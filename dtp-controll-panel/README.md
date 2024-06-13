@@ -12,7 +12,7 @@ Sony Digital Paper control plane to show random stuff on a set interval
 - Multi Function  [TODO]  
     - Weather
     - Calendar
-    - Stocks
+- Stocks ✔️
 
 
 ## Appendix
