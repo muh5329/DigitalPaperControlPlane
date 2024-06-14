@@ -111,24 +111,36 @@ class Stocker:
       cell_width = 150
       cell_height = 100
       margin = 50
-      data_frame = [data.items()]
-      # for key, value in data.items():
-      #     text = f"{key}: {value}"
-      #     c.drawString(100, y, text)
-      #     y -= 20  # Move to the next line
-   
+      data_frame = [[(0, 0) for _ in range(3)] for _ in range(len(data.items())//num_cols)]
+
+      rows = 0
+      cols = 0
+      for key, value in data.items():
+        data_frame[rows][cols] = (key,value)
+        if cols < num_cols - 1 :
+          cols += 1
+        else:
+          cols = 0 
+          if rows < num_rows -1 :
+            rows += 1 
+     
       # Draw grid of cubes
       for i in range(num_rows):
           for j in range(num_cols):
               x = margin + j * cell_width
               y = margin + (num_rows - i - 1) * cell_height
               c.rect(x, y, cell_width, cell_height)
-              c.drawString(x + 10, y + cell_height - 20, "Ticker: {ticker}")
-              c.drawString(x + 10, y + cell_height - 40, "Price: {price:.2f}")
+              obj = data_frame[i][j]
+              ticker = obj[0]
+              priceObj = obj[1]
+              # print("Ticker {ticker} priceObj : {priceObj}".format(ticker=ticker,priceObj=priceObj['price']))
+              c.drawString(x + 10, y + cell_height - 20, "Ticker: {ticker}".format(ticker=ticker))
+              c.drawString(x + 10, y + cell_height - 40, "Price: {price}".format(price=priceObj['price']))
               # Draw arrow
-              c.drawString(x + 10, y + cell_height - 60, "↑")
+              if priceObj['trend'] == "up":
+                c.drawString(x + 10, y + cell_height - 60, "↑")
               # c.drawString(x + 10, y + cell_height - 60, "↓")
-              c.drawString(x + 10, y + cell_height - 80, "Volume: {volume}")
+              c.drawString(x + 10, y + cell_height - 80, "Volume: {volume}".format(volume=priceObj['volume']))
 
       c.showPage()
       c.save()
