@@ -91,8 +91,8 @@ class Stocker:
 
   def build_default_tickers_daily(self):
     for ticker in self.default_tickers:
-      data = self.get_ticker_daily(ticker)
-      #data = self.get_dummy_daily_ticker(ticker)
+      # data = self.get_ticker_daily(ticker)
+      data = self.get_dummy_daily_ticker(ticker)
       self.stocker[ticker] =  {
               'price': data['1. open'],
               'lastPrice': '',
@@ -102,17 +102,40 @@ class Stocker:
 
   def create_pdf_from_dict(self,data, filename):
       c = canvas.Canvas(filename, pagesize=letter)
-      y = 750  # Starting y-coordinate for writing data
+      
+      # Set up grid parameters
+      # Max number of rows/col per page
 
-      for key, value in data.items():
-          text = f"{key}: {value}"
-          c.drawString(100, y, text)
-          y -= 20  # Move to the next line
+      num_rows = 7
+      num_cols = 3
+      cell_width = 150
+      cell_height = 100
+      margin = 50
+      data_frame = [data.items()]
+      # for key, value in data.items():
+      #     text = f"{key}: {value}"
+      #     c.drawString(100, y, text)
+      #     y -= 20  # Move to the next line
+   
+      # Draw grid of cubes
+      for i in range(num_rows):
+          for j in range(num_cols):
+              x = margin + j * cell_width
+              y = margin + (num_rows - i - 1) * cell_height
+              c.rect(x, y, cell_width, cell_height)
+              c.drawString(x + 10, y + cell_height - 20, "Ticker: {ticker}")
+              c.drawString(x + 10, y + cell_height - 40, "Price: {price:.2f}")
+              # Draw arrow
+              c.drawString(x + 10, y + cell_height - 60, "↑")
+              # c.drawString(x + 10, y + cell_height - 60, "↓")
+              c.drawString(x + 10, y + cell_height - 80, "Volume: {volume}")
 
+      c.showPage()
       c.save()
 
   
 
-# stocker = Stocker()
-# stocker.build_default_tickers_daily()
-# stocker.create_pdf_from_dict(stocker.stocker, "output.pdf")
+stocker = Stocker()
+stocker.build_default_tickers_daily()
+stocker.create_pdf_from_dict(stocker.stocker, "output.pdf")
+
