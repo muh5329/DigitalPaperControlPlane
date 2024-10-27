@@ -103,3 +103,9 @@ def pick_a_random_file_flip_to_page():
 
     print("finished")  
 
+# # # Example usage:
+# directory_path = "/Users/muneebhaq/Downloads/files"
+# upload_files_to_dpt(directory_path)    
+# # # Example usage:
+# directory_path = "/Users/muneebhaq/Downloads/files"
+# upload_files_to_dpt(directory_path)    
