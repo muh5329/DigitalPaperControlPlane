@@ -65,8 +65,8 @@ def authenticate(dpt):
     dpt.authenticate(client_id, key)
 
 # # Example usage:
-# directory_path = "/Users/muneebhaq/Downloads/pdf"
-# upload_files_to_dpt(directory_path)    
+directory_path = "/Users/muneebhaq/Downloads/files"
+upload_files_to_dpt(directory_path)    
 
 
 """

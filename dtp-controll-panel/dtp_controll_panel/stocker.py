@@ -147,7 +147,7 @@ class Stocker:
 
   
 
-stocker = Stocker()
-stocker.build_default_tickers_daily()
-stocker.create_pdf_from_dict(stocker.stocker, "output.pdf")
+# stocker = Stocker()
+# stocker.build_default_tickers_daily()
+# stocker.create_pdf_from_dict(stocker.stocker, "output.pdf")
 
